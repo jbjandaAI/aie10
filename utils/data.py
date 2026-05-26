@@ -45,6 +45,24 @@ def get_regression_dataset(name: str, n_samples: int = 120, noise: float = 0.25,
     return X.astype(np.float32), y.astype(np.float32)
 
 
+def get_linear_regression_dataset(
+    n_samples: int = 120,
+    noise: float = 0.5,
+    seed: int = 7,
+    a_true: float = 1.5,
+    b_true: float = -0.4,
+):
+    """1-D linear regression: y = a_true * x + b_true + Gaussian noise.
+
+    Returns (X, y, a_true, b_true) so the page can compare the learned
+    slope/intercept against the ground truth.
+    """
+    rng = np.random.RandomState(seed)
+    X = np.sort(rng.uniform(-3.0, 3.0, n_samples)).reshape(-1, 1)
+    y = a_true * X.ravel() + b_true + rng.normal(0.0, noise, size=n_samples)
+    return X.astype(np.float32), y.astype(np.float32), float(a_true), float(b_true)
+
+
 def mesh_grid(X, pad: float = 0.5, step: float = 0.03):
     x_min, x_max = X[:, 0].min() - pad, X[:, 0].max() + pad
     y_min, y_max = X[:, 1].min() - pad, X[:, 1].max() + pad

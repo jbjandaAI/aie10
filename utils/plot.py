@@ -92,20 +92,36 @@ def plot_regression(
     title: str = "",
     xlabel: str = "x",
     ylabel: str = "y",
+    overlays=None,
+    line_label: str = "tree prediction",
 ):
-    """Plot 1D regression data with the model's piecewise prediction overlay."""
+    """Plot 1D regression data with the model's prediction overlay.
+
+    If ``overlays`` is provided as a list of ``(X_i, y_i, label, color)``
+    tuples, those are scattered instead of the default single-color training
+    scatter — useful for showing train/val/test splits side by side.
+    """
     x_flat = np.asarray(X).ravel()
     pad = 0.3 * (x_flat.max() - x_flat.min())
     xs = np.linspace(x_flat.min() - pad, x_flat.max() + pad, 600).reshape(-1, 1)
     ys = model.predict(xs)
 
-    ax.scatter(
-        x_flat, y,
-        s=34, c="#4c78a8", edgecolors="white", linewidths=0.7,
-        zorder=3, label="training data",
-    )
+    if overlays:
+        for X_i, y_i, label_i, color_i in overlays:
+            xi = np.asarray(X_i).ravel()
+            ax.scatter(
+                xi, y_i,
+                s=34, c=color_i, edgecolors="white", linewidths=0.7,
+                zorder=3, label=label_i,
+            )
+    else:
+        ax.scatter(
+            x_flat, y,
+            s=34, c="#4c78a8", edgecolors="white", linewidths=0.7,
+            zorder=3, label="training data",
+        )
     ax.plot(xs.ravel(), ys, color="#e45756", linewidth=2.2,
-            label="tree prediction", zorder=4)
+            label=line_label, zorder=4)
 
     ax.set_xlabel(xlabel, fontsize=10, color="#555")
     ax.set_ylabel(ylabel, fontsize=10, color="#555")

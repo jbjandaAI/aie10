@@ -20,6 +20,8 @@ Step through each algorithm visually. Use the sidebar to navigate between topics
 | 3 | **Boosting (AdaBoost)** | Sample weights update as weak learners are added sequentially |
 | 4 | **Stacking** | Base learners feed predictions into a meta-learner |
 | 5 | **XGBoost** | Additive trees fit on gradients of the residuals |
+| 6 | **Linear Regression** | 1-D least-squares fit, train/val/test splits, Ridge & Lasso |
+| 7 | **Logistic Regression** | Linear decision boundary in 2D, held-out metrics, regularization sweep |
 
 Each page includes a **play** control, a **step** slider, and a short written explanation of what is happening at the current frame.
 """
