@@ -31,6 +31,7 @@ with tab_cls:
                            key="cls_dataset")
     n_samples = c2.slider("Samples", 80, 400, 200, step=20, key="cls_n")
     noise = c3.slider("Noise", 0.0, 0.6, 0.25, step=0.05, key="cls_noise")
+    st.markdown("**Hyperparameters** (set *before* training — also includes `Max depth` in the sidebar)")
     criterion = c1.selectbox("Split criterion", ["gini", "entropy"], key="cls_crit")
 
     X, y = get_dataset(dataset, n_samples=n_samples, noise=noise)
@@ -58,6 +59,7 @@ with tab_cls:
             simplify_tree_labels(ax2)
             ax2.set_title(f"Tree structure (depth {depth})", fontsize=11)
             st.pyplot(fig2, use_container_width=True)
+            st.caption("**Parameters** (*learned* from training): each node's split feature & threshold, and each leaf's predicted class.")
 
     if play:
         for d in range(1, max_depth + 1):
@@ -90,6 +92,7 @@ with tab_reg:
                                key="reg_dataset")
     reg_n = r2.slider("Samples", 40, 300, 120, step=10, key="reg_n")
     reg_noise = r3.slider("Noise", 0.0, 1.0, 0.25, step=0.05, key="reg_noise")
+    st.markdown("**Hyperparameters** (set *before* training — also includes `Max depth` in the sidebar)")
     reg_crit = r1.selectbox("Split criterion",
                             ["squared_error", "friedman_mse", "absolute_error"],
                             key="reg_crit")
@@ -125,6 +128,7 @@ with tab_reg:
             simplify_tree_labels(ax2, drop_prefixes=("samples",))
             ax2.set_title(f"Tree structure (depth {depth})", fontsize=11)
             st.pyplot(fig2, use_container_width=True)
+            st.caption("**Parameters** (*learned* from training): each node's split feature & threshold, and each leaf's predicted value.")
 
     if play:
         for d in range(1, max_depth + 1):
