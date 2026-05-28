@@ -1,3 +1,14 @@
+---
+title: AIE10 Ensemble Methods
+emoji: 🌳
+colorFrom: green
+colorTo: blue
+sdk: streamlit
+sdk_version: 1.32.0
+app_file: Home.py
+pinned: false
+---
+
 # AIE10 — Ensemble Methods Visualizations
 
 Animated walkthroughs of core ensemble learning algorithms for the **Applied Artificial Intelligence** course.
