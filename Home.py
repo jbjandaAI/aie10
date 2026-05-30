@@ -23,6 +23,7 @@ Step through each algorithm visually. Use the sidebar to navigate between topics
 | 6 | **Linear Regression** | 1-D least-squares fit, train/val/test splits, Ridge & Lasso |
 | 7 | **Logistic Regression** | Linear decision boundary in 2D, held-out metrics, regularization sweep |
 | 8 | **Support Vector Machines** | Margins, support vectors, kernels, and ε-insensitive SVR |
+| 9 | **k-Nearest Neighbors** | Voronoi-like boundaries, the effect of k, distance weighting, and accuracy-vs-k |
 
 Each page includes a **play** control, a **step** slider, and a short written explanation of what is happening at the current frame.
 """
