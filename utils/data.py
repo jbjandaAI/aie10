@@ -39,6 +39,26 @@ def get_dataset(name: str, n_samples: int = 200, noise: float = 0.25, seed: int 
     return X.astype(np.float32), y.astype(int)
 
 
+def get_blobs_dataset(n_samples: int = 300, centers: int = 4,
+                      cluster_std: float = 0.6, seed: int = 7):
+    """Isotropic Gaussian blobs for clustering demos.
+
+    Returns (X, y_true). ``y_true`` is the generating cluster id — K-Means itself
+    only consumes ``X``, but the labels let a page reveal the "correct" number of
+    clusters for the elbow / silhouette demos. Centered and lightly scaled so both
+    axes contribute equally to Euclidean distance.
+    """
+    X, y = make_blobs(
+        n_samples=n_samples,
+        n_features=2,
+        centers=centers,
+        cluster_std=cluster_std,
+        random_state=seed,
+    )
+    X = (X - X.mean(axis=0)) / X.std(axis=0)
+    return X.astype(np.float32), y.astype(int)
+
+
 def get_regression_dataset(name: str, n_samples: int = 120, noise: float = 0.25, seed: int = 7):
     """1D regression problems used by the Decision Trees page."""
     rng = np.random.RandomState(seed)
